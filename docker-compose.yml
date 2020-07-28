@@ -1,0 +1,23 @@
+version: '2.1'
+
+services:
+  nginx:
+    image: nginx:latest
+    restart: always
+    container_name: ${NGINX_CONTAINER}
+    ports:
+    - ${NGINX_PROT}:80
+    - ${NGINX_SSL_PROT}:443
+    volumes:
+      - ${NGINX_CONF}:/etc/nginx/conf.d/
+      - ${APP_CODE_PATH}:/usr/share/nginx/html
+    networks:
+      - frontend
+
+networks:
+  frontend:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${SUBNET}
+          gateway: ${GETWAY}
