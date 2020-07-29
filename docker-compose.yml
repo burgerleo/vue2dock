@@ -10,6 +10,7 @@ services:
     - ${NGINX_SSL_PROT}:443
     volumes:
       - ${NGINX_CONF}:/etc/nginx/conf.d/
+      - ${NGINX_SSL}:/etc/nginx/ssl/
       - ${APP_CODE_PATH}:/usr/share/nginx/html
     networks:
       - frontend
