@@ -17,6 +17,7 @@ services:
 
 networks:
   frontend:
+    name: ${FRONTEND_NETWORK_NAME}
     driver: bridge
     ipam:
       config:
