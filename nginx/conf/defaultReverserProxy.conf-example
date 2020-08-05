@@ -1,0 +1,21 @@
+server{
+    listen 80;
+    listen [::]:80;
+
+    server_name 127.0.0.1;
+
+    location /somepath {
+        # 後端的 Server ，真實伺服器
+        proxy_pass http://someurl;
+
+        # 定義 header 記錄使用者IP
+        proxy_set_header X-Real-IP $remote_addr;
+
+        # 讓後端的 Web 伺服器可以取得使用者真實 IP
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+        # 把 Protocol header 也往後送
+        proxy_set_header X-Forwarded-Proto $http_x_forwarded_proto;
+        proxy_max_temp_file_size 0;
+    }
+}
