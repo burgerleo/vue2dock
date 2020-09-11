@@ -12,6 +12,11 @@ services:
       - ${NGINX_CONF}:/etc/nginx/conf.d/
       - ${NGINX_SSL}:/etc/nginx/ssl/
       - ${APP_CODE_PATH}:/usr/share/nginx/html
+    logging:
+      driver: ${LOG_DRIVER}
+      options:
+          max-file: ${MAX_FILE}
+          max-size: ${MAX_SIZE}
     networks:
       - frontend
 
