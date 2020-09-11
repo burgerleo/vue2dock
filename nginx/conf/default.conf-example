@@ -9,6 +9,14 @@ server {
     location / {
         try_files $uri $uri/ /index.html;
     
+        # 從系統時間中正則匹配出年月日
+        if ($time_iso8601 ~ "^(\d{4})-(\d{2})-(\d{2})") {
+            set $date $1$2$3;
+        }
+        
+        # 日期記錄日誌
+        # access_log  /var/log/nginx/portal_$date.log;
+
         access_log  /var/log/nginx/log.log;
     }
 }
