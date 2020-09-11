@@ -2,7 +2,7 @@ version: '2.1'
 
 services:
   nginx:
-    image: nginx:latest
+    build: ./nginx
     restart: always
     container_name: ${NGINX_CONTAINER}
     ports:
@@ -12,6 +12,7 @@ services:
       - ${NGINX_CONF}:/etc/nginx/conf.d/
       - ${NGINX_SSL}:/etc/nginx/ssl/
       - ${APP_CODE_PATH}:/usr/share/nginx/html
+      - ${NGINX_LOG}:/var/log/nginx
     logging:
       driver: ${LOG_DRIVER}
       options:
